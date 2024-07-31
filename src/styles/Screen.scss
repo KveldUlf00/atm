@@ -1,0 +1,19 @@
+.screen {
+    min-height: 60%;
+    display: flex;
+
+    &__left-panel,
+    &__right-panel {
+        background-color: #000;
+        flex-basis: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__middle-panel {
+        background-color: #111;
+        flex-basis: 80%;
+    }
+}
