@@ -1,0 +1,96 @@
+.atm-button {
+    background-color: silver;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 0;
+    transition: .2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.left {
+        .arrow {
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    &.right {
+        .arrow {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    svg {
+        transform: scaleY(3);
+    }
+}
+
+
+.keyboard-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.keyboard-row {
+    display: flex;
+}
+
+.key-button {
+    background-color: silver;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin: .375rem;
+    outline: none;
+    
+    &:nth-of-type(4n) {
+        width: 100px;
+    }
+
+    &:disabled {
+        background-color: silver !important;
+        color: rgba(16, 16, 16, 0.3) !important;
+        cursor: default;
+        opacity: .8;
+    }
+
+    &.not-clickable {
+        cursor: default;
+    }
+  
+    &.cancel {
+      background-color: red;
+      color: white;
+    }
+  
+    &.clear {
+      background-color: yellow;
+      color: black;
+    }
+  
+    &.enter {
+      background-color: green;
+      color: white;
+    }
+}
+  
+
