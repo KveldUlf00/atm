@@ -15,5 +15,20 @@
     &__middle-panel {
         background-color: #111;
         flex-basis: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+
+        &__option {
+            flex-basis: 50%;
+            height: 25%;
+
+            &__label {
+                min-width: 15rem;
+                min-height: 3rem;
+                background-color: silver;
+                color: #000;
+            }
+        }
     }
 }
