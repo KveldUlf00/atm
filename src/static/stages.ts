@@ -1,7 +1,11 @@
 import { Stages } from "../types/main";
-import { RootState } from "../state/store";
 import { store } from "../state/store";
-import { appendBalance } from "../state/balance/balanceSlice";
+import { appendBalance, subtractBalance } from "../state/balance/balanceSlice";
+import {
+  disableATMButtons,
+  enableKeyboard,
+} from "../state/permissions/permissionsSlice";
+import { changeValueType } from "../state/keyboard/keyboardSlice";
 
 const getBalanceRaport = () => {
   const balanceValue = store.getState().balance.balance;
@@ -11,6 +15,8 @@ const getBalanceRaport = () => {
 const changeBalance = (operation: "add" | "subtract", value: number) => {
   if (operation === "add") {
     store.dispatch(appendBalance(value));
+  } else {
+    store.dispatch(subtractBalance(value));
   }
 };
 
@@ -65,7 +71,15 @@ const availableStages: Stages = {
       toStage: "start",
       action: () => changeBalance("subtract", 200),
     },
-    { label: "Other", toStage: "start" },
+    {
+      label: "Other",
+      toStage: "start",
+      emptyAction: () => {
+        store.dispatch(changeValueType("subtract"));
+        store.dispatch(enableKeyboard());
+        store.dispatch(disableATMButtons());
+      },
+    },
   ],
   deposit: [
     { label: "Select the amount to be deposited" },
@@ -75,7 +89,15 @@ const availableStages: Stages = {
     { label: "50", toStage: "start", action: () => changeBalance("add", 50) },
     { label: "100", toStage: "start", action: () => changeBalance("add", 100) },
     { label: "200", toStage: "start", action: () => changeBalance("add", 200) },
-    { label: "Other", toStage: "start" },
+    {
+      label: "Other",
+      toStage: "start",
+      emptyAction: () => {
+        store.dispatch(changeValueType("append"));
+        store.dispatch(enableKeyboard());
+        store.dispatch(disableATMButtons());
+      },
+    },
   ],
 };
 

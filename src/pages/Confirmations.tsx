@@ -1,36 +1,39 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface MessageHoleProps {
   message?: string;
+  setMessage: Dispatch<SetStateAction<string>>;
 }
 
-export default function Confirmations({ message }: MessageHoleProps) {
-  const [showPaper, setShowPaper] = useState(false);
+export default function Confirmations({
+  message,
+  setMessage,
+}: MessageHoleProps) {
   const [modalOpen, setModalOpen] = useState(false);
-
-  const handlePaperVisibility = () => {
-    setShowPaper(true);
-  };
 
   const handlePaperClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
     setModalOpen(true);
-    setShowPaper(false);
+  };
+
+  const handlePaperClose = () => {
+    setModalOpen(false);
+    setMessage("");
   };
 
   return (
     <div className="message-hole-container">
-      <div className="message-hole" onClick={handlePaperVisibility}>
-        {showPaper && (
+      <div className="message-hole">
+        {message && (
           <div className="paper" onClick={(e) => handlePaperClick(e)}></div>
         )}
       </div>
       {modalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={() => setModalOpen(false)}>
+            <span className="close" onClick={handlePaperClose}>
               &times;
             </span>
             <p>
