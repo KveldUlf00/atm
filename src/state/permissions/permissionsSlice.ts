@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface PermissionsState {
   canUseATMButtons: boolean;
   canUseKeyboard: boolean;
+  windowLoading: boolean;
 }
 
 const initialState: PermissionsState = {
   canUseATMButtons: false,
   canUseKeyboard: false,
+  windowLoading: false,
 };
 
 const permissionsSlice = createSlice({
@@ -26,6 +28,12 @@ const permissionsSlice = createSlice({
     disableKeyboard: (state) => {
       state.canUseKeyboard = false;
     },
+    windowIsLoading: (state) => {
+      state.windowLoading = true;
+    },
+    windowIsLoaded: (state) => {
+      state.windowLoading = false;
+    },
   },
 });
 
@@ -34,6 +42,8 @@ export const {
   disableATMButtons,
   enableKeyboard,
   disableKeyboard,
+  windowIsLoading,
+  windowIsLoaded,
 } = permissionsSlice.actions;
 
 export default permissionsSlice.reducer;

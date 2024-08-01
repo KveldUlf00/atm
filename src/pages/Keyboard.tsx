@@ -1,24 +1,51 @@
-import { useDispatch } from "react-redux";
+import { Dispatch, SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import KeyboardButton from "../components/KeyboardButton";
 import { appendValue, clearValue } from "../state/keyboard/keyboardSlice";
+import { RootState } from "../state/store";
+import { appendBalance, subtractBalance } from "../state/balance/balanceSlice";
+import { StagesNames } from "../types/main";
+import {
+  disableKeyboard,
+  enableATMButtons,
+} from "../state/permissions/permissionsSlice";
 
 type ButtonConfig = {
   label: string;
   type?: "cancel" | "clear" | "enter" | "default";
 };
 
-export default function Keyboard() {
+interface KeyboardProps {
+  setStage: Dispatch<SetStateAction<StagesNames>>;
+}
+
+export default function Keyboard({ setStage }: KeyboardProps) {
+  const keyboardValue = useSelector((state: RootState) => state.keyboard.value);
+  const valueType = useSelector((state: RootState) => state.keyboard.type);
+
   const dispatch = useDispatch();
 
   // TODO: "cancel" and others out of magic strings
   const handleClick = (label: string) => {
     if (label === "cancel") {
-      console.log("cancel");
+      dispatch(disableKeyboard());
+      dispatch(enableATMButtons());
+      setStage("start");
     } else if (label === "clear") {
       dispatch(clearValue());
     } else if (label === "enter") {
-      console.log("enter");
+      dispatch(clearValue());
+      dispatch(disableKeyboard());
+      dispatch(enableATMButtons());
+
+      if (valueType === "append") {
+        appendBalance(Number(keyboardValue));
+      } else {
+        subtractBalance(Number(keyboardValue));
+      }
+
+      setStage("start");
     } else {
       dispatch(appendValue(label));
     }

@@ -9,6 +9,7 @@ export type StageOption = {
   label: string;
   toStage?: string;
   action?: () => void;
+  emptyAction?: () => void;
 };
 
 export type Stages = {
