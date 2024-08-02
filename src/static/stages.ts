@@ -9,7 +9,7 @@ import { changeValueType } from "../state/keyboard/keyboardSlice";
 
 const getBalanceRaport = () => {
   const balanceValue = store.getState().balance.balance;
-  return `Your current balance is ${Number(balanceValue)}.`;
+  return balanceValue;
 };
 
 const changeBalance = (operation: "add" | "subtract", value: number) => {
@@ -31,7 +31,9 @@ const availableStages: Stages = {
     {
       label: "Print data",
       toStage: "start",
-      action: () => console.log("Your data"),
+      action: () => `Name: Kamil
+      Surname: Tumulec
+      Age: 38`,
     },
     { label: "Back", toStage: "start" },
   ],
@@ -45,7 +47,7 @@ const availableStages: Stages = {
   ],
   withdrawal: [
     { label: "Select the amount you wish to withdraw" },
-    { label: "" },
+    { label: "Back", toStage: "start" },
     {
       label: "10",
       toStage: "start",
@@ -83,7 +85,7 @@ const availableStages: Stages = {
   ],
   deposit: [
     { label: "Select the amount to be deposited" },
-    { label: "" },
+    { label: "Back", toStage: "start" },
     { label: "10", toStage: "start", action: () => changeBalance("add", 10) },
     { label: "25", toStage: "start", action: () => changeBalance("add", 25) },
     { label: "50", toStage: "start", action: () => changeBalance("add", 50) },

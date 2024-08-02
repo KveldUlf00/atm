@@ -29,9 +29,11 @@ const permissionsSlice = createSlice({
       state.canUseKeyboard = false;
     },
     windowIsLoading: (state) => {
+      console.log("true");
       state.windowLoading = true;
     },
     windowIsLoaded: (state) => {
+      console.log("false");
       state.windowLoading = false;
     },
   },

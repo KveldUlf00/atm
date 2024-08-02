@@ -1,5 +1,6 @@
 .atm-button {
     background-color: silver;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 6px 6px 15px rgba(0, 0, 0, 0.15);
     border: 2px solid #000;
     border-radius: 5px;
     width: 4rem;
@@ -12,6 +13,10 @@
     position: relative;
     padding: 0;
     transition: .2s;
+
+    &:disabled {
+        color: #000;
+    }
 
     &:hover {
         opacity: 0.8;
@@ -34,23 +39,18 @@
     svg {
         transform: scaleY(3);
     }
-}
 
-
-.keyboard-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-  
-.keyboard-row {
-    display: flex;
+    @media (max-width: $sm-screen) {
+        width: 3.5rem;
+        height: 3.5rem;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2), 2px 2px 5px rgba(0, 0, 0, 0.15);
+    }
 }
 
 .key-button {
-    background-color: silver;
-    border: 1px solid #ccc;
+    background-color: #c0c0c0;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 6px 6px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid #000;
     border-radius: 5px;
     width: 3.5rem;
     height: 3.5rem;
@@ -61,25 +61,32 @@
     font-size: 1.25rem;
     margin: .375rem;
     outline: none;
+    transition: .2s;
     
     &:nth-of-type(4n) {
         width: 100px;
     }
 
     &:disabled {
-        background-color: silver !important;
-        color: rgba(16, 16, 16, 0.3) !important;
-        cursor: default;
-        opacity: .8;
+        color: #000;
+    }
+
+    &:hover {
+        opacity: 0.5;
     }
 
     &.not-clickable {
         cursor: default;
+
+        &:hover {
+            opacity: unset;
+        }
     }
   
     &.cancel {
       background-color: red;
-      color: white;
+      border-color: #fff;
+      color: #fff;
     }
   
     &.clear {
@@ -89,7 +96,8 @@
   
     &.enter {
       background-color: green;
-      color: white;
+      border-color: #fff;
+      color: #fff;
     }
 }
   

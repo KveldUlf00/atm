@@ -1,32 +1,40 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface MessageHoleProps {
-  message?: string;
-  setMessage: Dispatch<SetStateAction<string>>;
+  messages?: (number | string)[];
+  setMessages: Dispatch<SetStateAction<(number | string)[]>>;
 }
 
 export default function Confirmations({
-  message,
-  setMessage,
+  messages,
+  setMessages,
 }: MessageHoleProps) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [paperVisible, setPaperVisible] = useState(false);
 
   const handlePaperClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation();
     setModalOpen(true);
+    setPaperVisible(false);
   };
 
   const handlePaperClose = () => {
     setModalOpen(false);
-    setMessage("");
+    setMessages([]);
   };
+
+  useEffect(() => {
+    if (messages !== undefined && messages?.length > 0) {
+      setPaperVisible(true);
+    }
+  }, [messages]);
 
   return (
     <div className="message-hole-container">
       <div className="message-hole">
-        {message && (
+        {paperVisible && (
           <div className="paper" onClick={(e) => handlePaperClick(e)}></div>
         )}
       </div>
@@ -36,10 +44,18 @@ export default function Confirmations({
             <span className="close" onClick={handlePaperClose}>
               &times;
             </span>
-            <p>
-              {message ||
-                "Siała baba mak Siała baba mak Siała baba mak Siała baba mak"}
-            </p>
+            {messages?.map((message, index) => (
+              <p
+                key={`key-${index}-${message}`}
+                className={`modal-content__message ${
+                  messages.length === 1 && "alone"
+                } ${typeof message === "string" && "preLine"}`}
+              >
+                {typeof message === "string"
+                  ? message
+                  : `Your current balance is ${message}.`}
+              </p>
+            ))}
           </div>
         </div>
       )}

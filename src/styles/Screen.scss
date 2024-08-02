@@ -1,19 +1,37 @@
+// TODO colors as variable
+$color1: #102fa1;
+$color2: #1c41c7;
+
 .screen {
-    min-height: 60%;
+    background-color: #777;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    height: 50%;
     display: flex;
+    border-radius: 1%;
+    transform: perspective(900px) rotateX(10deg);
+
+    
+    @media (max-width: $md-screen) {
+        transform: none
+    }
 
     &__left-panel,
     &__right-panel {
-        background-color: #000;
+        background-color: #777;
         flex-basis: 10%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+
+        @media (max-width: $sm-screen) {
+            padding: 0 .25rem;
+        }
     }
 
     &__middle-panel {
-        background-color: #111;
+        background: linear-gradient(to top, #102fa1, #1133ad, #082282);
         flex-basis: 80%;
         display: flex;
         flex-wrap: wrap;
@@ -23,18 +41,32 @@
         &__keyboardValue {
             position: absolute;
             width: 28rem;
-            top: 50%;
+            top:35%;
             left: calc(50% - 14rem);
             text-align: center;
             display: flex;
             flex-direction: column;
 
-            .green {
+            span {
+                margin: .5rem 0;
+            }
+
+            .green, .red, .yellow {
                 background-color: green;
-                color: white;
+                color: #fff;
                 padding: 1px 2px;
                 border: 1px solid #fff;
                 border-radius: 4px;
+            }
+
+            .red {
+                background-color: red;
+            }
+
+            .yellow {
+                background-color: yellow;
+                color: #000;
+                border-color: #000;
             }
 
             .value {
@@ -69,7 +101,7 @@
             align-items: center;
 
             svg {
-                animation: blink 1s infinite;
+                animation: blinkOpacity 1s infinite;
             }
 
             span {
@@ -85,14 +117,37 @@
             &__label {
                 min-width: 15rem;
                 min-height: 3rem;
-                background-color: silver;
-                color: #000;
+                border-radius: 1.5rem;
+                border: 2px solid #fff;
+                color: #fff;
+
+                &__readOnly {
+                    border: none;
+                    border-radius: 0;
+                }
+
+                @media (max-width: $sm-screen) {
+                    min-width: 9rem;
+                }
+
+                
+                @media (max-width: $exsm-screen) {
+                    min-width: 7.5rem;
+                }
+            }
+
+            @media (max-width: $sm-screen) {
+                font-size: .875rem;
+            }
+
+            @media (max-width: $exsm-screen) {
+                font-size: .75rem;
             }
         }
     }
 }
 
-@keyframes blink {
+@keyframes blinkOpacity {
     0%, 100% {
       opacity: 1;
     }

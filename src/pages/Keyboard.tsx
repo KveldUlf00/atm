@@ -9,6 +9,8 @@ import { StagesNames } from "../types/main";
 import {
   disableKeyboard,
   enableATMButtons,
+  windowIsLoaded,
+  windowIsLoading,
 } from "../state/permissions/permissionsSlice";
 
 type ButtonConfig = {
@@ -26,23 +28,30 @@ export default function Keyboard({ setStage }: KeyboardProps) {
 
   const dispatch = useDispatch();
 
+  const initConfiguration = () => {
+    dispatch(clearValue());
+    dispatch(disableKeyboard());
+    dispatch(enableATMButtons());
+  };
+
   // TODO: "cancel" and others out of magic strings
   const handleClick = (label: string) => {
     if (label === "cancel") {
-      dispatch(disableKeyboard());
-      dispatch(enableATMButtons());
-      setStage("start");
+      dispatch(windowIsLoading());
+      initConfiguration();
+      setTimeout(() => {
+        setStage("start");
+        dispatch(windowIsLoaded());
+      }, 2000);
     } else if (label === "clear") {
       dispatch(clearValue());
     } else if (label === "enter") {
-      dispatch(clearValue());
-      dispatch(disableKeyboard());
-      dispatch(enableATMButtons());
+      initConfiguration();
 
       if (valueType === "append") {
-        appendBalance(Number(keyboardValue));
+        dispatch(appendBalance(Number(keyboardValue)));
       } else {
-        subtractBalance(Number(keyboardValue));
+        dispatch(subtractBalance(Number(keyboardValue)));
       }
 
       setStage("start");
