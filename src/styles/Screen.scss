@@ -1,9 +1,5 @@
-// TODO colors as variable
-$color1: #102fa1;
-$color2: #1c41c7;
-
 .screen {
-    background-color: #777;
+    background-color: $dark-grey;
     margin-top: 2rem;
     padding: 1rem 0;
     height: 50%;
@@ -18,7 +14,7 @@ $color2: #1c41c7;
 
     &__left-panel,
     &__right-panel {
-        background-color: #777;
+        background-color: $dark-grey;
         flex-basis: 10%;
         display: flex;
         flex-direction: column;
@@ -40,12 +36,24 @@ $color2: #1c41c7;
 
         &__keyboardValue {
             position: absolute;
-            width: 28rem;
+            max-width: 28rem;
             top:35%;
             left: calc(50% - 14rem);
             text-align: center;
             display: flex;
             flex-direction: column;
+
+            @media (max-width: $sm-screen) {
+                max-width: 18rem;
+                left: calc(50% - 9rem);
+                font-size: .875rem;
+            }
+
+            @media (max-width: $exsm-screen) {
+                max-width: 13rem;
+                left: calc(50% - 6.5rem);
+                font-size: .875rem;
+            }
 
             span {
                 margin: .5rem 0;
@@ -124,6 +132,7 @@ $color2: #1c41c7;
                 &__readOnly {
                     border: none;
                     border-radius: 0;
+                    text-align: center;
                 }
 
                 @media (max-width: $sm-screen) {

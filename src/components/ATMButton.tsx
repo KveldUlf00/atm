@@ -1,8 +1,6 @@
-// src/components/ATMButton.tsx
-import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
+import { useSelector } from "react-redux";
 
 interface ATMButtonProps {
   onClick: () => void;

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Confirmations from "./Confirmations";
 import Keyboard from "./Keyboard";
 import Screen from "./Screen";
 
+import { StagesNames, StageOption, StageEnum } from "../types/main";
+import { RootState } from "../state/store";
 import {
   enableATMButtons,
   windowIsLoading,
   windowIsLoaded,
 } from "../state/permissions/permissionsSlice";
 import availableStages from "../static/stages";
-import { StagesNames, StageOption } from "../types/main";
-import { RootState } from "../state/store";
 
 function App() {
   const [applicationFetched, setApplicationFetched] = useState(false);
-  const [stage, setStage] = useState<StagesNames>("start");
+  const [stage, setStage] = useState<StagesNames>(StageEnum.start);
   const [messages, setMessages] = useState<(number | string)[]>([]);
 
   const balanceValue = useSelector((state: RootState) => state.balance.balance);
@@ -43,7 +43,6 @@ function App() {
           const result = stage.action!();
 
           if (result !== undefined) {
-            console.log("result", result);
             setMessages((origin) => origin.concat(result));
           }
         }
@@ -80,10 +79,9 @@ function App() {
     };
 
     if (stage === "start") wait();
-  }, [stage]);
+  }, [dispatch, stage]);
 
   useEffect(() => {
-    console.log("balanceValue", balanceValue);
     if (applicationFetched) {
       dispatch(windowIsLoading());
       setTimeout(() => {

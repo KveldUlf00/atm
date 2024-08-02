@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// TODO append and subtrack to one variable
 interface KeyboardState {
   value: string;
   type: "append" | "subtract";
