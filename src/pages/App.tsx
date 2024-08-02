@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Confirmations from "./Confirmations";
@@ -12,7 +12,7 @@ import {
   windowIsLoading,
   windowIsLoaded,
 } from "../state/permissions/permissionsSlice";
-import availableStages from "../static/stages";
+import availableStages from "../utils/stages";
 
 function App() {
   const [applicationFetched, setApplicationFetched] = useState(false);

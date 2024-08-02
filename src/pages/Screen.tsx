@@ -1,9 +1,9 @@
+import React, { useEffect } from "react";
 import { Ban } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 import ATMButton from "../components/ATMButton";
-import availableStages from "../static/stages";
+import availableStages from "../utils/stages";
 import { RootState } from "../state/store";
 import { StagesNames } from "../types/main";
 import { clearError } from "../state/balance/balanceSlice";

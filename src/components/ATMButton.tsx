@@ -1,3 +1,4 @@
+import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { RootState } from "../state/store";
 import { useSelector } from "react-redux";
