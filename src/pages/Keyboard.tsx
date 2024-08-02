@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import KeyboardButton from "../components/KeyboardButton";

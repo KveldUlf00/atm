@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Welcome to my project!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hi! My name is Błażej Raducki. I hope that everything work fine, below I described interesting information about the project
 
-## Available Scripts
-
-In the project directory, you can run:
+# How to run project
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+maybe it will be also usefull:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm install`
 
-### `npm test`
+## My Node and Npm version
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Node: 18.17.1`
 
-### `npm run build`
+### `Npm: 6.14.4`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Implementation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I tried my best to perform the task assigned to me. Perhaps I had a little too much fun using "store". In my opinion, all the required elements are completed. If for someone my view of ATM is not the most beautiful then I apologize, usually UX layouts save me :)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Elements visible in the preview are almost always clickable (just like in real life), but are functional only when necessary.
 
-### `npm run eject`
+All delays ("Processing...") are implemented specifically to best represent reality.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The design is responsive up to 380px screen width.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Possible implementation incompatibilities
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Display to show account balance - In my application, this can be previewed by going to "Balance" and selecting "Print balance" there. I hope that my interpretation of the preview is not something very wrong. I wanted to replicate the operation of the ATM as much as possible, and there such a cool preview of the balance is not there ;)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Project online
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://singular-liger-772b69.netlify.app/

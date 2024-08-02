@@ -42,7 +42,7 @@ const availableStages: Stages = {
   ],
   balance: [
     {
-      label: "Print data",
+      label: "Print balance",
       toStage: StageEnum.start,
       action: () => getBalanceRaport(),
     },
