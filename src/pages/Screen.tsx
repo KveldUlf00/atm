@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Ban } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import ATMButton from "../components/ATMButton";
+import availableStages from "../static/stages";
 import { RootState } from "../state/store";
 import { StagesNames } from "../types/main";
-import availableStages from "../static/stages";
-import { useEffect } from "react";
 import { clearError } from "../state/balance/balanceSlice";
 
 type ScreenProps = {

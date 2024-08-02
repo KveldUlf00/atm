@@ -15,7 +15,11 @@ const balanceSlice = createSlice({
   initialState,
   reducers: {
     appendBalance: (state, action: PayloadAction<number>) => {
-      state.balance += action.payload;
+      if (action.payload > 10000) {
+        state.error = "The maximum amount to be deposited is 10,000.";
+      } else {
+        state.balance += action.payload;
+      }
     },
     subtractBalance: (state, action: PayloadAction<number>) => {
       if (state.balance < action.payload) {

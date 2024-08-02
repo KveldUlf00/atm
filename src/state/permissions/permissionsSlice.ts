@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface PermissionsState {
   canUseATMButtons: boolean;
@@ -29,11 +29,9 @@ const permissionsSlice = createSlice({
       state.canUseKeyboard = false;
     },
     windowIsLoading: (state) => {
-      console.log("true");
       state.windowLoading = true;
     },
     windowIsLoaded: (state) => {
-      console.log("false");
       state.windowLoading = false;
     },
   },
