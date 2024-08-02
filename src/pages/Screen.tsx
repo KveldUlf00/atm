@@ -26,8 +26,6 @@ export default function Screen({ stage, atmButtonHandler }: ScreenProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("errorInBalance", errorInBalance);
-
     if (errorInBalance) {
       const timer = setTimeout(() => {
         dispatch(clearError());
@@ -44,6 +42,13 @@ export default function Screen({ stage, atmButtonHandler }: ScreenProps) {
           <span>
             Type the value on the keyboard and confirm by pressing{" "}
             <span className="green">enter</span>
+          </span>
+          <span>
+            Press <span className="red">cancel</span> to return to the main menu
+          </span>
+          <span>
+            To correct the entered amount press{" "}
+            <span className="yellow">clear</span>
           </span>
           <span className="value">
             Value: <span className="value__inner">{keyboardValue}</span>
@@ -64,7 +69,11 @@ export default function Screen({ stage, atmButtonHandler }: ScreenProps) {
           key={`atmButton-right-key-${index}`}
           className="screen__middle-panel__option flex-center"
         >
-          <span className="screen__middle-panel__option__label flex-center">
+          <span
+            className={`screen__middle-panel__option__label${
+              "toStage" in elem ? "" : "__readOnly"
+            } flex-center`}
+          >
             {elem.label}
           </span>
         </div>

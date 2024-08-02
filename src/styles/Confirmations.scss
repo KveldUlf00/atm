@@ -17,12 +17,11 @@
 .paper {
     width: 4rem;
     height: 6rem;
-    background-color: white;
+    background-color: #fff;
     position: absolute;
     top: .5rem;
     left: 2.5rem;
-    animation: blink 2s infinite;
-    animation: showUp 1s 1;
+    animation: blink 2s infinite, showUp 1s 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     z-index: 10;
@@ -30,10 +29,10 @@
   
 @keyframes blink {
     0%, 100% {
-      opacity: 1;
+    box-shadow: 0 0 16px #fcfc38
     }
     50% {
-      opacity: .8;
+        box-shadow: 0 0 0 #fcfc38
     }
 }
 
@@ -67,6 +66,31 @@
     text-align: center;
     position: relative;
     color: #000;
+
+    &__message {
+        margin: 0;
+        padding: 1rem 0;
+
+        &.alone::after {
+            content: "" !important;
+            margin-left: 0 !important;
+        }
+
+        &:not(:last-child) {
+            border-bottom: 1px dotted #000;
+        }
+
+        &:last-child::after {
+            content: "New";
+            font-size: 0.75rem;
+            color: #ff0000;
+            margin-left: 0.5rem;
+        }
+
+        &.preLine {
+            white-space: pre-line;
+        }
+    }
 }
   
 .close {

@@ -12,15 +12,14 @@ import {
 } from "../state/permissions/permissionsSlice";
 import availableStages from "../static/stages";
 import { StagesNames, StageOption } from "../types/main";
-// import { RootState } from "../state/store";
+import { RootState } from "../state/store";
 
 function App() {
+  const [applicationFetched, setApplicationFetched] = useState(false);
   const [stage, setStage] = useState<StagesNames>("start");
-  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<(number | string)[]>([]);
 
-  // const canUseKeyboard = useSelector(
-  //   (state: RootState) => state.permissions.canUseKeyboard
-  // );
+  const balanceValue = useSelector((state: RootState) => state.balance.balance);
 
   const dispatch = useDispatch();
 
@@ -44,7 +43,8 @@ function App() {
           const result = stage.action!();
 
           if (result !== undefined) {
-            setMessage(result);
+            console.log("result", result);
+            setMessages((origin) => origin.concat(result));
           }
         }
       }, 2000);
@@ -65,12 +65,11 @@ function App() {
 
     const clickedElem = availableStages[stage][dataIndex] as StageOption;
 
-    stageHandler(clickedElem);
+    if (clickedElem !== undefined) stageHandler(clickedElem);
   };
 
   useEffect(() => {
-    const waitAndSetMessage = async () => {
-      console.log("loading");
+    const wait = async () => {
       dispatch(windowIsLoading());
       const min = 1000;
       const max = 2500;
@@ -78,11 +77,23 @@ function App() {
         setTimeout(resolve, min + Math.random() * (max - min))
       );
       dispatch(windowIsLoaded());
-      console.log("its loaded");
     };
 
-    if (stage === "start") waitAndSetMessage();
+    if (stage === "start") wait();
   }, [stage]);
+
+  useEffect(() => {
+    console.log("balanceValue", balanceValue);
+    if (applicationFetched) {
+      dispatch(windowIsLoading());
+      setTimeout(() => {
+        setMessages((origin) => origin.concat(balanceValue));
+        dispatch(windowIsLoaded());
+      }, 2000);
+    } else {
+      setApplicationFetched(true);
+    }
+  }, [balanceValue, dispatch]);
 
   useEffect(() => {
     dispatch(enableATMButtons());
@@ -92,7 +103,7 @@ function App() {
     <div className="app">
       <div className="device">
         <Screen stage={stage} atmButtonHandler={atmButtonHandler} />
-        <Confirmations message={message} setMessage={setMessage} />
+        <Confirmations messages={messages} setMessages={setMessages} />
         <Keyboard setStage={setStage} />
       </div>
     </div>
